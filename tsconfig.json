@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  },
+  "files": [],
+  "include": [],
+  "references": [
+    { "path": "./packages/shared-types" },
+    { "path": "./packages/shared-services" },
+    { "path": "./packages/cv-renderer" },
+    { "path": "./apps/pdf-service" }
+  ]
+}
