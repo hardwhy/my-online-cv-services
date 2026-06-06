@@ -50,6 +50,12 @@ jobs:
 
     steps:
       - name: Trigger Render deploy hook
-        run: curl -fsS -X POST "$RENDER_PDF_SERVICE_DEPLOY_HOOK_URL"
+        run: |
+          if [ -z "$RENDER_PDF_SERVICE_DEPLOY_HOOK_URL" ]; then
+            echo "RENDER_PDF_SERVICE_DEPLOY_HOOK_URL GitHub secret is not set."
+            exit 1
+          fi
+
+          curl -fsS -X POST "$RENDER_PDF_SERVICE_DEPLOY_HOOK_URL"
         env:
           RENDER_PDF_SERVICE_DEPLOY_HOOK_URL: ${{ secrets.RENDER_PDF_SERVICE_DEPLOY_HOOK_URL }}
