@@ -1,7 +1,7 @@
 import { PDFDocument } from 'pdf-lib';
 import { chromium } from 'playwright';
 import { renderCVHtml } from '../../../packages/cv-renderer/src/index';
-import type { CVData } from '@portfolio/shared-types';
+import type { CVData } from '@web-cv-services/shared-types';
 import type { CvPdfRequest } from './requestSchema';
 
 export async function generateCvPdf(data: CVData, options: CvPdfRequest) {
