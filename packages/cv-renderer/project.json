@@ -1,0 +1,17 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "cv-renderer",
+  "projectType": "library",
+  "sourceRoot": "packages/cv-renderer/src",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/packages/cv-renderer"],
+      "options": {
+        "command": "tsc -p packages/cv-renderer/tsconfig.json",
+        "cwd": "{workspaceRoot}"
+      }
+    }
+  },
+  "tags": ["type:lib", "scope:shared"]
+}
