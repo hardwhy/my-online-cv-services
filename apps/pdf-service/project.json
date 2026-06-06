@@ -1,0 +1,23 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "pdf-service",
+  "projectType": "application",
+  "sourceRoot": "apps/pdf-service/src",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node --import tsx apps/pdf-service/src/server.ts",
+        "cwd": "{workspaceRoot}"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -p apps/pdf-service/tsconfig.json --noEmit",
+        "cwd": "{workspaceRoot}"
+      }
+    }
+  },
+  "tags": ["type:app", "scope:pdf"]
+}
