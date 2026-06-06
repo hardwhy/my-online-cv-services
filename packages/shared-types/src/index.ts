@@ -19,3 +19,14 @@ export type {
   Stat,
   Testimonial,
 } from './cv';
+
+export type {
+  AdminFieldConfig,
+  AdminFieldKind,
+  AdminRecord,
+  AdminRecordValue,
+  AdminTableConfig,
+  AdminTableName,
+  StorageTargetKind,
+  StorageUploadTarget,
+} from './admin';

@@ -9,7 +9,6 @@
     { "path": "./packages/shared-types" },
     { "path": "./packages/shared-services" },
     { "path": "./packages/cv-renderer" },
-    { "path": "./packages/shared-ui" },
     { "path": "./apps/pdf-service" }
   ]
 }
