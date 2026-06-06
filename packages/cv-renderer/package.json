@@ -1,0 +1,12 @@
+{
+  "name": "@portfolio/cv-renderer",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@portfolio/shared-types": "0.1.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  }
+}

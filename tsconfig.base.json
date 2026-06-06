@@ -16,7 +16,7 @@
     "paths": {
       "@portfolio/shared-types": ["packages/shared-types/src/index.ts"],
       "@portfolio/shared-services": ["packages/shared-services/src/index.ts"],
-      "@portfolio/cv-renderer": ["packages/cv-renderer/src/index.ts"]
+      "@portfolio/cv-renderer": ["packages/cv-renderer/src/index.ts"],
     }
   }
 }
