@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import type { CVData, CVExportOptions, CVTemplateMeta, SkillCategory } from '@portfolio/shared-types';
+import type { CVData, CVExportOptions, CVTemplateMeta, SkillCategory } from '@web-cv-services/shared-types';
 
 type CVDocumentProps = {
   data: CVData;

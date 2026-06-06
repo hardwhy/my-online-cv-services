@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import type { CVData, CVExportOptions } from '@portfolio/shared-types';
+import type { CVData, CVExportOptions } from '@web-cv-services/shared-types';
 import { CVDocument } from './CVDocument';
 import { cvPrintCss } from './styles';
 
