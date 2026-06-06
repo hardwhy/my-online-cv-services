@@ -11,7 +11,7 @@ import type {
   SocialLink,
   Stat,
   Testimonial,
-} from '@portfolio/shared-types';
+} from '@web-cv-services/shared-types';
 
 type PortfolioVisibility = 'public' | 'admin';
 
