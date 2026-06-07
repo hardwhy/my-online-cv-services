@@ -34,7 +34,7 @@ function BulletList({ items }: { items: string[] }) {
 }
 
 export function ModernAtsCV({ data }: CVDocumentProps) {
-  const { profile, experiences, skills, projects, certifications, achievements } = data;
+  const { profile, socials, experiences, skills, projects, certifications, achievements } = data;
   const featuredProjects = projects.filter((project) => project.featured).slice(0, 4);
   const visibleProjects = featuredProjects.length > 0 ? featuredProjects : projects.slice(0, 4);
   const hasSkills = skills.length > 0;
@@ -48,7 +48,7 @@ export function ModernAtsCV({ data }: CVDocumentProps) {
           <span>{profile.location}</span>
           <span>{profile.email}</span>
           {profile.phone ? <span>{profile.phone}</span> : null}
-          {profile.socials.map((social) => (
+          {socials.map((social) => (
             <a key={social.href} href={social.href}>
               {social.label}: {socialHref(social.href)}
             </a>

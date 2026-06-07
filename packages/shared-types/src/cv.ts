@@ -1,6 +1,9 @@
 export type SocialLink = {
   label: string;
   href: string;
+  icon?: string;
+  showInWeb: boolean;
+  isPublished: boolean;
 };
 
 export type Stat = {
@@ -15,8 +18,6 @@ export type Profile = {
   location: string;
   email: string;
   phone?: string;
-  resumeUrl?: string;
-  socials: SocialLink[];
   stats: Stat[];
   strengths: string[];
   interests: string[];
@@ -88,6 +89,7 @@ export type BlogPost = {
 
 export type CVData = {
   profile: Profile;
+  socials: SocialLink[];
   skills: Skill[];
   experiences: Experience[];
   projects: Project[];
