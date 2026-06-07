@@ -1,5 +1,6 @@
 export type AdminTableName =
   | 'site_profile'
+  | 'social_links'
   | 'skills'
   | 'experiences'
   | 'projects'
@@ -39,7 +40,7 @@ export type AdminTableConfig = {
   supportsDelete?: boolean;
 };
 
-export type StorageTargetKind = 'profile' | 'project-thumbnail' | 'certificate-file' | 'certificate-preview';
+export type StorageTargetKind = 'profile' | 'social-icon' | 'project-thumbnail' | 'certificate-file' | 'certificate-preview';
 
 export type StorageUploadTarget = {
   kind: StorageTargetKind;

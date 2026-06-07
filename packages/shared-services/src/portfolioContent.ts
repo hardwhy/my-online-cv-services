@@ -17,6 +17,7 @@ type PortfolioVisibility = 'public' | 'admin';
 
 type PortfolioContentFallbacks = {
   profile?: Profile;
+  socials?: SocialLink[];
   skills?: Skill[];
   experiences?: Experience[];
   projects?: Project[];
@@ -38,11 +39,17 @@ type ProfileRow = {
   location: string;
   email: string;
   phone: string | null;
-  resume_url: string | null;
-  socials: unknown;
   stats: unknown;
   strengths: string[] | null;
   interests: string[] | null;
+};
+
+type SocialLinkRow = {
+  label: string;
+  href: string;
+  icon: string | null;
+  show_in_web: boolean;
+  is_published: boolean;
 };
 
 type SkillRow = {
@@ -121,11 +128,11 @@ export const emptyPortfolioContent: CVData = {
     summary: '',
     location: '',
     email: '',
-    socials: [],
     stats: [],
     strengths: [],
     interests: [],
   },
+  socials: [],
   skills: [],
   experiences: [],
   projects: [],
@@ -140,11 +147,17 @@ export const mapProfileRow = (row: ProfileRow, fallback?: Profile): Profile => (
   location: row.location,
   email: row.email,
   phone: row.phone ?? undefined,
-  resumeUrl: optionalUrl(row.resume_url) ?? fallback?.resumeUrl,
-  socials: readArray<SocialLink>(row.socials, fallback?.socials),
   stats: readArray<Stat>(row.stats, fallback?.stats),
   strengths: readArray<string>(row.strengths, fallback?.strengths),
   interests: readArray<string>(row.interests, fallback?.interests),
+});
+
+export const mapSocialLinkRow = (row: SocialLinkRow): SocialLink => ({
+  label: row.label,
+  href: row.href,
+  icon: row.icon ?? undefined,
+  showInWeb: row.show_in_web,
+  isPublished: row.is_published,
 });
 
 export const mapSkillRow = (row: SkillRow): Skill => ({
@@ -202,13 +215,23 @@ export async function getPortfolioProfile(client: SupabaseClient | null, options
     throw new Error('Supabase is not configured.');
   }
 
-  const query = client.from('site_profile').select('full_name,title,summary,location,email,phone,resume_url,socials,stats,strengths,interests').limit(1);
+  const query = client.from('site_profile').select('full_name,title,summary,location,email,phone,stats,strengths,interests').limit(1);
   const { data, error } = await withPublishedFilter(query, options.visibility ?? 'public').maybeSingle<ProfileRow>();
 
   if (error) throw error;
   if (!data && fallback) return fallback;
   if (!data) throw new Error('No CV profile content is available.');
   return mapProfileRow(data, fallback);
+}
+
+export async function getPortfolioSocialLinks(client: SupabaseClient | null, options: PortfolioContentOptions = {}): Promise<SocialLink[]> {
+  if (!client) return options.fallbacks?.socials ?? [];
+
+  const query = client.from('social_links').select('label,href,icon,show_in_web,is_published').order('label', { ascending: true });
+  const { data, error } = await withPublishedFilter(query, options.visibility ?? 'public');
+
+  if (error) throw error;
+  return (data as SocialLinkRow[]).map(mapSocialLinkRow);
 }
 
 export async function getPortfolioSkills(client: SupabaseClient | null, options: PortfolioContentOptions = {}): Promise<Skill[]> {
@@ -287,8 +310,9 @@ export async function getPortfolioBlogPosts(client: SupabaseClient | null, optio
 }
 
 export async function getPortfolioCVData(client: SupabaseClient | null, options: PortfolioContentOptions = {}): Promise<CVData> {
-  const [profile, skills, experiences, projects, certifications, achievements] = await Promise.all([
+  const [profile, socials, skills, experiences, projects, certifications, achievements] = await Promise.all([
     getPortfolioProfile(client, options),
+    getPortfolioSocialLinks(client, options),
     getPortfolioSkills(client, options),
     getPortfolioExperiences(client, options),
     getPortfolioProjects(client, options),
@@ -298,6 +322,7 @@ export async function getPortfolioCVData(client: SupabaseClient | null, options:
 
   return {
     profile,
+    socials,
     skills,
     experiences,
     projects,

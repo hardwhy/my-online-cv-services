@@ -21,6 +21,7 @@ export {
   getPortfolioProfile,
   getPortfolioProjects,
   getPortfolioSkills,
+  getPortfolioSocialLinks,
   getPortfolioTestimonials,
   mapBlogPostRow,
   mapCertificationRow,
@@ -28,4 +29,5 @@ export {
   mapProfileRow,
   mapProjectRow,
   mapSkillRow,
+  mapSocialLinkRow,
 } from './portfolioContent';
