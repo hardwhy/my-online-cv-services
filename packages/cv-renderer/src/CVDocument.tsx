@@ -48,7 +48,7 @@ export function ModernAtsCV({ data }: CVDocumentProps) {
           <span>{profile.location}</span>
           <span>{profile.email}</span>
           {profile.phone ? <span>{profile.phone}</span> : null}
-          {socials.map((social) => (
+          {socials.filter((social) => social.isPublished).map((social) => (
             <a key={social.href} href={social.href}>
               {social.label}: {socialHref(social.href)}
             </a>
