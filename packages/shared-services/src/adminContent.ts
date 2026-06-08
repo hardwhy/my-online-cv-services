@@ -244,7 +244,7 @@ export async function uploadPortfolioAsset(client: SupabaseClient | null, target
   const supabase = ensureClient(client);
   const path = resolveStoragePath(target, slug);
   const { error } = await supabase.storage.from(target.bucket).upload(path, file, {
-    cacheControl: '3600',
+    cacheControl: '0',
     contentType: file.type || undefined,
     upsert: true,
   });
